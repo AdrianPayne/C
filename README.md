@@ -1,3 +1,9 @@
 # C
-## Son
-Create a son process and wait until it finish.
+## Simple exercises
+### process's syscalls
+*son
+### files's syscalls
+*HelloworldW
+*copy.c
+*copy_arg.c
+*std_RnW.c
