@@ -1,7 +1,7 @@
 # C
 ## Simple exercises
 ### process's syscalls
-*son
+* son
 ### files's syscalls
 * HelloworldW
 * copy.c
