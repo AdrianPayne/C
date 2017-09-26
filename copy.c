@@ -17,14 +17,13 @@ int main(int arg, char *args[]){
 
 	do {
 		val_r = read(fd,buf,bytes);
-		printf("val_r = %d\n",val_r);
-
 		if (val_r == -1){
 			write(1,"ERROR\n",bytes);
 			close(fd);
 			close(fd2);
 			_exit(0);
 		}
+		
 		write(fd2,buf,val_r);
 	} while(val_r > 0);
 
