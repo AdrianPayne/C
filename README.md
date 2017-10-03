@@ -1,9 +1,10 @@
 # C
 ## Simple exercises
 ### process's syscalls
-* son
+* son.c
+* plusingfamily.c
 ### files's syscalls
-* HelloworldW
+* HelloworldW.c
 * copy.c
 * copy_arg.c
 * std_RnW.c
