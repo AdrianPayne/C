@@ -9,3 +9,5 @@
 * copy.c
 * copy_arg.c
 * std_RnW.c
+### pipe and dup's syscalls
+* cat_2.c
