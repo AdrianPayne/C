@@ -7,38 +7,97 @@
 //READ
 #include <unistd.h>
 
-int main(int arg, char *args[]){
-//1. Abrir el fichero de ordenes
-	int cmd = open(args[1],O_RDONLY,S_IREAD);
-//2.Interpretarlo e iniciar bucle
-	int	val_r = 0;
-	char buf[1];
-	buf[0] = 0;
+//EXIT
+#include <stdlib.h>
 
-	char *words[3][8];
+//WAIT
+#include <sys/wait.h>
+
+int main(int arg, char* args[]){
+//1. Abrir el fichero de ordenes
+
+	int cmd = open(args[1],O_RDONLY);
+
+//2.Interpretarlo e iniciar bucle
+
+	int	val_r = 0;
+	char buf;
+
+
+	char words[3][8];
 
 	int i = 0;
 	int j = 0;
+
+	int n;
+	int m;
+		//Inicializacion words
+	for(n=0;n<3;n++){
+		for(m=0;m<8;m++){
+			words[i][n] = ' ';
+		}
+	}
+
+		//Fork and execve
+	int pid = 0;
+
+	char *argv[] = {NULL,NULL};
+	char *env[] = {NULL};
+
+		//Exit and wait
+	int *status;
+
 	do {
-		val_r = read(cmd,buf,1);
+		val_r = read(cmd,&buf,1);
+		//EXCEPTION
 		if (val_r == -1){
-			write(1,"ERROR\n",6);
+			printf("ERROR lectura\n");
 			close(cmd);
-			_exit(0);
+			exit(0);
 		}
 
-		words[i][j] = buf[0];
-		j++;
-		if (buf[0] == ' '){
-			printf(words[i]);
+		if ((buf == '\n' || buf == '\0') && val_r != 0){
+			i=0;
+			j=0;
+
+/*			for(n=0;n<3;n++){
+				printf("%s \n",words[n]);
+			}
+*/
+
+		//3.Llamar a Fork
+			pid = fork();
+
+			if(pid != 0){
+				printf("Soy papa! \n");
+				wait(status);
+				printf("%d! \n",*status);
+				if(*status != -1){
+					printf("SON WORKED! \n");
+				}else{
+					printf("SON FAILED! \n");
+				}
+			}else{
+				printf("SON PROCESS\n");
+				printf("-----------\n");
+				printf("Execute %s\n",words[0]);
+			//3.1 Execve del comando deseado
+				argv[0] = words[0];
+				execve(words[0],argv,env);
+				printf("ALGO HA FALLADO!\n");
+				exit(-1);
+			}
+		}else if(buf == ' '){
 			i++;
 			j = 0;
+		}else{
+			words[i][j] = buf;
+			j++;
 		}
+
 	} while(val_r > 0);
-//3.Llamar a Fork
 
-	//3.1 Execve del comando deseado	
-
+	
 //4.Finalizar
 
 
