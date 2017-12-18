@@ -1,4 +1,6 @@
 # C
+## Nice programs
+* orders.c: execute lines of a file in argument changing in/out std
 ## Simple exercises
 ### process's syscalls
 * son.c
