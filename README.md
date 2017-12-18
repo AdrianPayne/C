@@ -1,6 +1,7 @@
 # C
 ## Nice programs
 * orders.c: execute lines of a file in argument changing in/out std
+* calculadora.c: INCOMPLETE
 ## Simple exercises
 ### process's syscalls
 * son.c
